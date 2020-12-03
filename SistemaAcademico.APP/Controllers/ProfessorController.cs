@@ -17,6 +17,7 @@ namespace SistemaAcademico.APP.Controllers
             _contexto = contexto;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -72,6 +73,7 @@ namespace SistemaAcademico.APP.Controllers
                 await _contexto.SaveChangesAsync();
                 await _contexto.DisposeAsync();
             }
+
             return RedirectToAction(nameof(ListaDeProfessores));
         }
     }

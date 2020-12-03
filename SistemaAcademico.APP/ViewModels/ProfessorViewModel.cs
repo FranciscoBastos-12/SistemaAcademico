@@ -1,8 +1,5 @@
 ﻿using SistemaAcademico.APP.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaAcademico.APP.ViewModels
 {
@@ -27,11 +24,13 @@ namespace SistemaAcademico.APP.ViewModels
                 Nome = professorView.Nome,
                 DataNascimento = professorView.DataNascimento
             };
+
             professorModel.Contato.WhatsApp = professorView.WhatsApp;
             professorModel.Contato.EmailPrimario = professorView.EmailPrimario;
             professorModel.Contato.EmailSecundario = professorView.EmailSecundario;
             professorModel.RedesSociais.LinkedIn = professorView.LinkedIn;
             professorModel.RedesSociais.GitHub = professorView.GitHub;
+
             return professorModel;
         }
     }
