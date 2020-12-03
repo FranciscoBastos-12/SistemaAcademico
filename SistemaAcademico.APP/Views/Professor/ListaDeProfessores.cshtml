@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SistemaAcademico.APP.Entities.Professor>
+
+@{
+    ViewData["Title"] = "ListaDeProfessores";
+}
+
+<h1>ListaDeProfessores</h1>
+
+<p>
+    <a asp-action="NovoProfessor">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contato.WhatsApp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contato.EmailPrimario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contato.EmailSecundario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RedesSociais.LinkedIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RedesSociais.GitHub)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato.WhatsApp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato.EmailPrimario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato.EmailSecundario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RedesSociais.LinkedIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RedesSociais.GitHub)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
