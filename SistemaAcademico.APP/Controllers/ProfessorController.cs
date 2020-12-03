@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaAcademico.APP.Contexto;
 using SistemaAcademico.APP.Entities;
-using SistemaAcademico.APP.InterfacesRepositories;
 using SistemaAcademico.APP.ViewModels;
 
 namespace SistemaAcademico.APP.Controllers
@@ -26,7 +25,10 @@ namespace SistemaAcademico.APP.Controllers
         [HttpGet]
         public async Task<IActionResult> ListaDeProfessores()
         {
-            var listaDeProfessores = await _contexto.Professores.ToListAsync();
+            var listaDeProfessores = await _contexto.Professores.AsNoTracking()
+                                                                .Include(p => p.Contato)
+                                                                .Include(p => p.RedesSociais)
+                                                                .ToListAsync();
             return View(listaDeProfessores);
         }
 
