@@ -64,6 +64,7 @@ namespace SistemaAcademico.APP.Controllers
                 {
                     Id = Guid.NewGuid(),
                     NomeCompleto = model.Nome,
+                    Cpf = model.Cpf,
                     DataCadastro = DateTime.Now,
                     DataNascimento = model.DataNascimento,
                     Contato = contato,
@@ -75,7 +76,7 @@ namespace SistemaAcademico.APP.Controllers
                 await _contexto.DisposeAsync();
             }
 
-            return RedirectToAction(nameof(ListaDeAlunos));
+            return RedirectToAction(nameof(Index));
         }
     }
 }
