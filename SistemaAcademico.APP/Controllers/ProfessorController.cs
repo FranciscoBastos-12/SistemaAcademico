@@ -18,9 +18,13 @@ namespace SistemaAcademico.APP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var listaDeProfessores = await _contexto.Professores.AsNoTracking()
+                                                                .Include(p => p.Contato)
+                                                                .Include(p => p.RedesSociais)
+                                                                .ToListAsync();
+            return View(listaDeProfessores);
         }
 
         [HttpGet]
@@ -55,8 +59,8 @@ namespace SistemaAcademico.APP.Controllers
                 {
                     Id = Guid.NewGuid(),
                     WhatsApp = model.WhatsApp,
-                    EmailPrimario = model.EmailPrimario,
-                    EmailSecundario = model.EmailSecundario
+                    EmailPrimario = model.EmailPrimario.ToString(),
+                    EmailSecundario = model.EmailSecundario.ToString()
                 };
 
                 Professor novoProfessor = new Professor()

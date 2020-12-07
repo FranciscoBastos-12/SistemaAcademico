@@ -4,57 +4,71 @@
     ViewData["Title"] = "NovoProfessor";
 }
 
-<h1>NovoProfessor</h1>
-
-<h4>ProfessorViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="NovoProfessor">
+<div class="row" style="background-color: #fdf1e5">
+    <div class="col-lg-6  mt-3">
+        <div class="justify-content-center blackboard text-center text-white-50 h3 mx-3 py-3">
+            CADASTRO DE PROFESSOR
+        </div>
+        <img src="~/assets/teacher.jpg" class="img-fluid" alt="teacher" />
+    </div>
+    <div class="col-lg-6 mt-3">
+        <form class="blackboard p-3 text-white" asp-action="NovoProfessor">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="EmailPrimario" class="control-label"></label>
+                    <input asp-for="EmailPrimario" class="form-control" />
+                    <span asp-validation-for="EmailPrimario" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="EmailSecundario" class="control-label"></label>
+                    <input asp-for="EmailSecundario" class="form-control" />
+                    <span asp-validation-for="EmailSecundario" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="WhatsApp" class="control-label"></label>
-                <input asp-for="WhatsApp" class="form-control" />
-                <span asp-validation-for="WhatsApp" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="LinkedIn" class="control-label"></label>
+                    <input asp-for="LinkedIn" class="form-control" />
+                    <span asp-validation-for="LinkedIn" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="GitHub" class="control-label"></label>
+                    <input asp-for="GitHub" class="form-control" />
+                    <span asp-validation-for="GitHub" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EmailPrimario" class="control-label"></label>
-                <input asp-for="EmailPrimario" class="form-control" />
-                <span asp-validation-for="EmailPrimario" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="DataNascimento" class="control-label"></label>
+                    <input asp-for="DataNascimento" type="date" class="form-control" />
+                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="WhatsApp" class="control-label"></label>
+                    <input asp-for="WhatsApp" class="form-control" />
+                    <span asp-validation-for="WhatsApp" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="EmailSecundario" class="control-label"></label>
-                <input asp-for="EmailSecundario" class="form-control" />
-                <span asp-validation-for="EmailSecundario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LinkedIn" class="control-label"></label>
-                <input asp-for="LinkedIn" class="form-control" />
-                <span asp-validation-for="LinkedIn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GitHub" class="control-label"></label>
-                <input asp-for="GitHub" class="form-control" />
-                <span asp-validation-for="GitHub" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="row">
+                <div class="col-12 form-group">
+                    <input type="submit" value="Finalizar" class="btn btn-success font-weight-bold col-12 mt-2" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="ListaDeProfessores">Back to List</a>
-</div>
-
+<link href="~/css/professor.css" rel="stylesheet" />

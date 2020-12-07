@@ -56,8 +56,8 @@ namespace SistemaAcademico.APP.Controllers
                 {
                     Id = Guid.NewGuid(),
                     WhatsApp = model.WhatsApp,
-                    EmailPrimario = model.EmailPrimario,
-                    EmailSecundario = model.EmailSecundario
+                    EmailPrimario = model.EmailPrimario.ToString(),
+                    EmailSecundario = model.EmailSecundario.ToString()
                 };
 
                 Aluno novoAluno = new Aluno()
