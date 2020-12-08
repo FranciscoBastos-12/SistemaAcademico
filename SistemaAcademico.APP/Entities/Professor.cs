@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaAcademico.APP.ViewModels;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SistemaAcademico.APP.Entities

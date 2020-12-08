@@ -1,18 +1,18 @@
 ﻿@model SistemaAcademico.APP.ViewModels.ProfessorViewModel
 
 @{
-    ViewData["Title"] = "NovoProfessor";
+    ViewData["Title"] = "Editar Professor";
 }
 
 <div class="row" style="background-color: #fdf1e5">
     <div class="col-lg-6  mt-3">
         <div class="justify-content-center blackboard text-center text-white-50 h3 mx-3 py-3">
-            CADASTRO DE PROFESSOR
+            EDITAR CADASTRO DE PROFESSOR
         </div>
         <img src="~/assets/teacher.jpg" class="img-fluid" alt="teacher" />
     </div>
     <div class="col-lg-6 mt-3">
-        <form class="blackboard p-3 text-white" asp-action="NovoProfessor">
+        <form class="blackboard p-3 text-white" asp-action="EditarProfessor">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                 <div class="col-md-8 form-group">
@@ -51,20 +51,24 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-4 form-group">
                     <label asp-for="DataNascimento" class="control-label"></label>
                     <input asp-for="DataNascimento" type="date" class="form-control" />
                     <span asp-validation-for="DataNascimento" class="text-danger"></span>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-3 form-group">
                     <label asp-for="WhatsApp" class="control-label"></label>
                     <input asp-for="WhatsApp" class="form-control" />
                     <span asp-validation-for="WhatsApp" class="text-danger"></span>
                 </div>
+                <div class="col-md-5 form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                </div>
             </div>
             <div class="row">
                 <div class="col-12 form-group">
-                    <input type="submit" value="Finalizar cadastro" class="btn btn-success font-weight-bold col-12 mt-2" />
+                    <input type="submit" value="Finalizar alteração" class="btn btn-success font-weight-bold col-12 mt-2" />
                 </div>
             </div>
         </form>
