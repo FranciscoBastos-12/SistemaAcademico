@@ -18,17 +18,11 @@ namespace SistemaAcademico.APP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var listaDeDisciplinas = await _contexto.Disciplinas.AsNoTracking().ToListAsync();
 
-        [HttpGet]
-        public async Task<IActionResult> ListaDeDisciplinas()
-        {
-            var listaDeAlunos = await _contexto.Disciplinas.AsNoTracking().ToListAsync();
-
-            return View(listaDeAlunos);
+            return View(listaDeDisciplinas);
         }
 
         [HttpGet]
@@ -55,7 +49,7 @@ namespace SistemaAcademico.APP.Controllers
                 await _contexto.DisposeAsync();
             }
 
-            return RedirectToAction(nameof(ListaDeDisciplinas));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,18 +19,11 @@ namespace SistemaAcademico.APP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ListaDeCursos()
+        public async Task<IActionResult> Index()
         {
             var listaDeCursos = await _contexto.Cursos.AsNoTracking()
                                                       .Include(c => c.Disciplinas)
                                                       .ToListAsync();
-
             return View(listaDeCursos);
         }
 
@@ -56,7 +50,33 @@ namespace SistemaAcademico.APP.Controllers
                 await _contexto.DisposeAsync();
             }
 
-            return RedirectToAction(nameof(ListaDeCursos));
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditarCurso(string nome)
+        {
+            Curso cursoModel = await _contexto.Cursos.Where(c => c.Nome == nome).FirstOrDefaultAsync();
+
+            CursoViewModel cursoEditavel = new CursoViewModel()
+            {
+                Id = cursoModel.Id,
+                Nome = cursoModel.Nome,
+                Duracao = cursoModel.Duracao,
+            };
+
+            return View(cursoEditavel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoverCurso(string nome)
+        {
+            Curso cursoModel = await _contexto.Cursos.Where(c => c.Nome == nome).FirstOrDefaultAsync();
+            _contexto.Cursos.RemoveRange(cursoModel);
+            await _contexto.SaveChangesAsync();
+            await _contexto.DisposeAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

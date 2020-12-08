@@ -4,6 +4,7 @@ using SistemaAcademico.APP.Contexto;
 using SistemaAcademico.APP.Entities;
 using SistemaAcademico.APP.ViewModels;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SistemaAcademico.APP.Controllers
@@ -18,20 +19,13 @@ namespace SistemaAcademico.APP.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ListaDeAlunos()
+        public async Task<IActionResult> Index()
         {
             var listaDeAlunos = await _contexto.Alunos.AsNoTracking()
                                                       .Include(a => a.Contato)
                                                       .Include(a => a.RedesSociais)
                                                       .ToListAsync();
-
-            return View(listaDeAlunos);
+            return View();
         }
 
         [HttpGet]
@@ -75,6 +69,40 @@ namespace SistemaAcademico.APP.Controllers
                 await _contexto.SaveChangesAsync();
                 await _contexto.DisposeAsync();
             }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarAluno(string cpf)
+        {
+            Aluno alunoModel = await _contexto.Alunos.Where(a => a.Cpf == cpf).FirstOrDefaultAsync();
+            Contato contatoModel = await _contexto.Contatos.Where(c => c.Id == alunoModel.ContatoId).FirstOrDefaultAsync();
+            RedesSociais redesSociaisModel = await _contexto.RedesSociais.Where(r => r.Id == alunoModel.RedesSociaisId).FirstOrDefaultAsync();
+
+            AlunoViewModel alunoEditavel = new AlunoViewModel()
+            {
+                Id = alunoModel.Id,
+                Nome = alunoModel.NomeCompleto,
+                Cpf = alunoModel.Cpf,
+                DataNascimento = alunoModel.DataNascimento,
+                WhatsApp = contatoModel.WhatsApp,
+                EmailPrimario = contatoModel.EmailPrimario,
+                EmailSecundario = contatoModel.EmailSecundario,
+                LinkedIn = redesSociaisModel.LinkedIn,
+                GitHub = redesSociaisModel.GitHub
+            };
+
+            return View(alunoEditavel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoverAluno(string cpf)
+        {
+            Aluno alunoModel = await _contexto.Alunos.Where(a => a.Cpf == cpf).FirstOrDefaultAsync();
+            _contexto.Alunos.RemoveRange(alunoModel);
+            await _contexto.SaveChangesAsync();
+            await _contexto.DisposeAsync();
 
             return RedirectToAction(nameof(Index));
         }
