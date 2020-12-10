@@ -1,10 +1,20 @@
-﻿
+﻿@model IEnumerable<SistemaAcademico.APP.Entities.Aluno>
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Clique no link para ir para tela de criação de aluno</h1>
+<div class="row">
+    <div class="col-lg-6  mt-3">
+        <ul class="nav justify-content-center">
+            <li class="nav-item mx-2">
+                <a asp-area="" asp-controller="Aluno" asp-action="NovoAluno" class="nav-link text-dark bg--orange text--purple font-weight-bold">CADASTRO</a>
+            </li>
+        </ul>
+        <img src="~/assets/student.jpg" class="img-fluid" alt="student" />
+    </div>
+    <div class="col-lg-6  mt-3">
+        @await Html.PartialAsync("_ListaDeAlunos.cshtml", Model)
+    </div>
+</div>
 
-<ul>
-    <li><a class="nav-link text-dark" asp-area="" asp-controller="Aluno" asp-action="NovoAluno">Criar aluno</a></li>
-</ul>
+<link href="~/css/aluno.css" rel="stylesheet" />

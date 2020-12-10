@@ -25,7 +25,7 @@ namespace SistemaAcademico.APP.Controllers
                                                       .Include(a => a.Contato)
                                                       .Include(a => a.RedesSociais)
                                                       .ToListAsync();
-            return View();
+            return View(listaDeAlunos);
         }
 
         [HttpGet]
@@ -73,7 +73,7 @@ namespace SistemaAcademico.APP.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> EditarAluno(string cpf)
         {
             Aluno alunoModel = await _contexto.Alunos.Where(a => a.Cpf == cpf).FirstOrDefaultAsync();
@@ -94,6 +94,34 @@ namespace SistemaAcademico.APP.Controllers
             };
 
             return View(alunoEditavel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarAluno(ProfessorViewModel model)
+        {
+            Aluno alunoEditado = await _contexto.Alunos.Where(p => p.Id == model.Id).FirstOrDefaultAsync();
+            Contato contatoEditado = await _contexto.Contatos.Where(c => c.Id == alunoEditado.ContatoId).FirstOrDefaultAsync();
+            RedesSociais redesSociaisEditado = await _contexto.RedesSociais.Where(r => r.Id == alunoEditado.RedesSociaisId).FirstOrDefaultAsync();
+
+            contatoEditado.WhatsApp = model.WhatsApp;
+            contatoEditado.EmailPrimario = model.EmailPrimario;
+            contatoEditado.EmailSecundario = model.EmailSecundario;
+            _contexto.Contatos.Update(contatoEditado);
+
+            redesSociaisEditado.LinkedIn = model.LinkedIn;
+            redesSociaisEditado.GitHub = model.GitHub;
+            _contexto.RedesSociais.Update(redesSociaisEditado);
+
+            alunoEditado.NomeCompleto = model.Nome;
+            alunoEditado.Cpf = model.Cpf;
+            alunoEditado.DataNascimento = model.DataNascimento;
+            alunoEditado.Contato = contatoEditado;
+            alunoEditado.RedesSociais = redesSociaisEditado;
+            _contexto.Alunos.UpdateRange(alunoEditado);
+            await _contexto.SaveChangesAsync();
+            await _contexto.DisposeAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

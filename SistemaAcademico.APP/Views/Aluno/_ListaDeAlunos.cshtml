@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SistemaAcademico.APP.Entities.Aluno>
+
+@if (Model == null || Model.Count() <= 0)
+{
+    <div class="justify-content-center bg--purple text-center text-white-50 h3 mx-3 py-3">
+        Alunos cadastrados seram listados aqui
+    </div>
+}
+else
+{
+    <table class="table table-borderless table-hover table-responsive bg--purple text-center mt-3">
+        <thead class="bg--orange">
+            <tr class="text-white">
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeCompleto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contato.WhatsApp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contato.EmailPrimario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RedesSociais.LinkedIn)
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-white-50">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contato.WhatsApp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contato.EmailPrimario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RedesSociais.LinkedIn)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarAluno", new { cpf = item.Cpf }) |
+                        @Html.ActionLink("Remover", "RemoverAluno", new { cpf = item.Cpf })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

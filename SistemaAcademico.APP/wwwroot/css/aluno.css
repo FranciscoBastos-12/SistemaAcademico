@@ -1,0 +1,14 @@
+﻿.bg--orange, .btn--orange {
+    background-color: #E26D5B;
+    border-radius: 4px;
+}
+
+.bg--purple {
+    background-color: #39304B;
+    border-radius: 4px;
+}
+
+.text--purple {
+    color: #39304B;
+}
+
