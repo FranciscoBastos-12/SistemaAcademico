@@ -1,7 +1,7 @@
 ﻿@model SistemaAcademico.APP.ViewModels.CursoViewModel
 
 @{
-    ViewData["Title"] = "Novo Curso";
+    ViewData["Title"] = "Editar Curso";
 }
 
 <div class="row bg--brow">
@@ -12,8 +12,14 @@
         <img src="~/assets/training.jpg" class="img-fluid" alt="training" />
     </div>
     <div class="col-md-6 mt-3">
-        <form class="p-3 bg--darkblue text-white" asp-action="NovoCurso">
+        <form class="p-3 bg--darkblue text-white" asp-action="EditarCurso">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 form-group">
                     <label asp-for="Nome" class="control-label"></label>

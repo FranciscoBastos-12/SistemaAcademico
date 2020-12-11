@@ -1,19 +1,25 @@
 ﻿@model SistemaAcademico.APP.ViewModels.DisciplinaViewModel
 
 @{
-    ViewData["Title"] = "Nova Disciplina";
+    ViewData["Title"] = "Editar Disciplina";
 }
 
 <div class="row">
     <div class="col-lg-6  mt-3">
         <div class="justify-content-center bg--lightblue text-white text-center h3 mx-3 py-3">
-            CADASTRO DE DISCIPLINA
+            EDITAR CADASTRO DE DISCIPLINA
         </div>
         <img src="~/assets/course.jpg" class="img-fluid" alt="course" />
     </div>
     <div class="col-md-6 mt-3">
-        <form class="p-3 bg--light text--gray" asp-action="NovaDisciplina">
+        <form class="p-3 bg--light text--gray" asp-action="EditarDisciplina">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly />
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12 form-group">
                     <label asp-for="Nome" class="control-label"></label>
@@ -30,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="col-12 form-group">
-                    <input type="submit" value="Finalizar cadastro" class="btn btn--lightblue font-weight-bold col-12 mt-2" />
+                    <input type="submit" value="Finalizar alteração" class="btn btn--lightblue font-weight-bold col-12 mt-2" />
                 </div>
             </div>
         </form>

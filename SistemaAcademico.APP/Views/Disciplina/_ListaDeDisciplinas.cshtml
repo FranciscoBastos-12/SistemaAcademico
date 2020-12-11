@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaAcademico.APP.Entities.Disciplina>
+
+@if (Model == null || Model.Count() <= 0)
+{
+    <div class="justify-content-center bg--light text-center text--gray h3 mx-3 py-3">
+        Discilinas cadastradas seram listadas aqui
+    </div>
+}
+else
+{
+    <table class="table table-borderless table-hover table-responsive bg--light text--gray text-center mt-3">
+        <thead>
+            <tr class="text-dark">
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Periodo)
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Periodo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarDisciplina", new { id = item.Id }) |
+                        @Html.ActionLink("Remover", "RemoverDisciplina", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<link href="~/css/disciplina.css" rel="stylesheet" />

@@ -1,0 +1,16 @@
+﻿.bg--brow {
+    background-color: #E2D7C1;
+}
+
+.bg--darkblue {
+    background-color: #33576F;
+    border-radius: 4px;
+}
+
+.bg--gold, .btn--gold {
+    background-color: #f6BA35;
+}
+
+.btn--gold {
+    border-radius: 4px;
+}

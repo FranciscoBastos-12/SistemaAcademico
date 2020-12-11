@@ -10,8 +10,8 @@ using SistemaAcademico.APP.Contexto;
 namespace SistemaAcademico.APP.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    [Migration("20201203034425_DbMigration")]
-    partial class DbMigration
+    [Migration("20201211014124_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,14 +30,16 @@ namespace SistemaAcademico.APP.Migrations
                     b.Property<Guid>("ContatoId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
+
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DisciplinaId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
@@ -50,8 +52,6 @@ namespace SistemaAcademico.APP.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContatoId");
-
-                    b.HasIndex("DisciplinaId");
 
                     b.HasIndex("RedesSociaisId");
 
@@ -109,9 +109,6 @@ namespace SistemaAcademico.APP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CursoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -122,14 +119,7 @@ namespace SistemaAcademico.APP.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<Guid>("ProfessorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("ProfessorId");
 
                     b.ToTable("Disciplinas");
                 });
@@ -142,6 +132,11 @@ namespace SistemaAcademico.APP.Migrations
 
                     b.Property<Guid>("ContatoId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
@@ -232,26 +227,9 @@ namespace SistemaAcademico.APP.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SistemaAcademico.APP.Entities.Disciplina", null)
-                        .WithMany("Alunos")
-                        .HasForeignKey("DisciplinaId");
-
                     b.HasOne("SistemaAcademico.APP.Entities.RedesSociais", "RedesSociais")
                         .WithMany()
                         .HasForeignKey("RedesSociaisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SistemaAcademico.APP.Entities.Disciplina", b =>
-                {
-                    b.HasOne("SistemaAcademico.APP.Entities.Curso", null)
-                        .WithMany("Disciplinas")
-                        .HasForeignKey("CursoId");
-
-                    b.HasOne("SistemaAcademico.APP.Entities.Professor", "Professor")
-                        .WithMany()
-                        .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

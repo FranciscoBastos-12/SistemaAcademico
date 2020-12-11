@@ -8,7 +8,6 @@ namespace SistemaAcademico.APP.ViewModels
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Periodo { get; set; }
-        public Guid ProfessorId { get; set; }
 
         public Disciplina ToModel(DisciplinaViewModel disciplinaView)
         {
@@ -17,7 +16,6 @@ namespace SistemaAcademico.APP.ViewModels
                 Id = disciplinaView.Id,
                 Nome = disciplinaView.Nome,
                 Periodo = disciplinaView.Periodo,
-                ProfessorId = disciplinaView.ProfessorId
             };
 
             return disciplinaModel;

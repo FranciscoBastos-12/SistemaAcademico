@@ -21,9 +21,8 @@ namespace SistemaAcademico.APP.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var listaDeCursos = await _contexto.Cursos.AsNoTracking()
-                                                      .Include(c => c.Disciplinas)
-                                                      .ToListAsync();
+            var listaDeCursos = await _contexto.Cursos.AsNoTracking().ToListAsync();
+
             return View(listaDeCursos);
         }
 
@@ -54,9 +53,9 @@ namespace SistemaAcademico.APP.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditarCurso(string nome)
+        public async Task<IActionResult> EditarCurso(Guid id)
         {
-            Curso cursoModel = await _contexto.Cursos.Where(c => c.Nome == nome).FirstOrDefaultAsync();
+            Curso cursoModel = await _contexto.Cursos.Where(c => c.Id == id).FirstOrDefaultAsync();
 
             CursoViewModel cursoEditavel = new CursoViewModel()
             {
@@ -68,10 +67,24 @@ namespace SistemaAcademico.APP.Controllers
             return View(cursoEditavel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> RemoverCurso(string nome)
+        [HttpPost]
+        public async Task<IActionResult> EditarCurso(CursoViewModel model)
         {
-            Curso cursoModel = await _contexto.Cursos.Where(c => c.Nome == nome).FirstOrDefaultAsync();
+            Curso cursoEditado = await _contexto.Cursos.Where(c => c.Id == model.Id).FirstOrDefaultAsync();
+            cursoEditado.Nome = model.Nome;
+            cursoEditado.Duracao = model.Duracao;
+
+            _contexto.Cursos.UpdateRange(cursoEditado);
+            await _contexto.SaveChangesAsync();
+            await _contexto.DisposeAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoverCurso(Guid id)
+        {
+            Curso cursoModel = await _contexto.Cursos.Where(c => c.Id == id).FirstOrDefaultAsync();
             _contexto.Cursos.RemoveRange(cursoModel);
             await _contexto.SaveChangesAsync();
             await _contexto.DisposeAsync();

@@ -12,7 +12,5 @@ namespace SistemaAcademico.APP.Entities
         public string Nome { get; set; }
         [Required, MaxLength(20)]
         public string Duracao { get; set; }
-
-        public virtual ICollection<Disciplina> Disciplinas { get; set; }
     }
 }

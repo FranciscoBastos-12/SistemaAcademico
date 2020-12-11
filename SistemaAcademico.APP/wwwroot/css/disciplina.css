@@ -1,0 +1,14 @@
+﻿.bg--light {
+    background-color: #FBE0B3;
+    border: 8px solid #86B2F3;
+    border-radius: 4px;
+}
+
+.bg--lightblue, .btn--lightblue {
+    background-color: #86B2F3;
+    border-radius: 4px;
+}
+
+.text--gray {
+    color: #666;
+}

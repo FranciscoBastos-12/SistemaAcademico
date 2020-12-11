@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SistemaAcademico.APP.Entities.Curso>
+
+@if (Model == null || Model.Count() <= 0)
+{
+    <div class="justify-content-center text-center bg--darkblue text-white-50 h3 mx-3 py-3">
+        Cursos cadastrados seram listados aqui
+    </div>
+}
+else
+{
+    <table class="table table-borderless table-hover table-responsive bg--darkblue text-white text-center mt-3">
+        <thead class="bg--gold">
+            <tr class="text-white">
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duracao)
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-white-50">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duracao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarCurso", new { id = item.Id }) |
+                        @Html.ActionLink("Remover", "RemoverCurso", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<link href="~/css/curso.css" rel="stylesheet" />
